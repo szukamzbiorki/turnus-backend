@@ -126,14 +126,9 @@ export default {
               description: 'na przyklad:"ARTISTS", albo "SPECIAL THANKS" ',
             },
             {
-              name: 'name',
-              type: 'array',
-              title: 'Name',
-              of: [
-                {
-                  type: 'string',
-                },
-              ],
+              name: 'names',
+              type: 'string',
+              title: 'Names',
             },
           ],
         },

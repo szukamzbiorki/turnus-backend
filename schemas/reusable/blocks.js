@@ -150,7 +150,7 @@ export default {
     },
     {
       name: 'bigimg',
-      title: 'Image [Stack]',
+      title: 'Image [Single]',
       type: 'object',
       icon: ImageIcon,
       fields: [
@@ -165,6 +165,15 @@ export default {
               title: 'Image',
             },
           ],
+        },
+        {
+          name: 'size',
+          type: 'string',
+          title: 'Size',
+          options: {
+            list: ['S', 'M', 'L'],
+            layout: 'radio',
+          },
         },
         {
           name: 'credit',
@@ -190,7 +199,7 @@ export default {
         prepare(selection) {
           const {images} = selection
           return {
-            title: 'Big Image(s)',
+            title: 'Image [Single]',
             subtitle: 'number of photos:' + images.length,
             media: images[0],
           }
@@ -233,7 +242,7 @@ export default {
           name: 'align',
           type: 'string',
           options: {
-            list: ['left', 'middle', 'right'],
+            list: ['left', 'right'],
             layout: 'radio',
           },
           validation: (Rule) => Rule.required(),
@@ -257,9 +266,74 @@ export default {
         prepare(selection) {
           const {image, title} = selection
           return {
-            title: 'Big Image + Meta',
+            title: 'Image [Meta]',
             subtitle: title,
             media: image,
+          }
+        },
+      },
+    },
+    {
+      name: 'row',
+      title: 'Image [Row]',
+      type: 'object',
+      icon: ImagesIcon,
+      fields: [
+        {
+          name: 'images',
+          type: 'array',
+          title: 'Images',
+          of: [
+            {
+              name: 'image',
+              type: 'image',
+              title: 'Image',
+              fields: [
+                {
+                  name: 'author',
+                  type: 'string',
+                  title: 'Author',
+                },
+                {
+                  name: 'title',
+                  type: 'string',
+                  title: 'Title',
+                },
+                {
+                  name: 'medium',
+                  type: 'string',
+                  title: 'Medium',
+                },
+                {
+                  name: 'price',
+                  type: 'string',
+                  title: 'Price',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: 'space',
+          type: 'string',
+          title: 'Space Below',
+          options: {
+            list: ['0', 'S', 'M', 'L', 'XL'],
+            layout: 'radio',
+          },
+          validation: (Rule) => Rule.required(),
+        },
+      ],
+      preview: {
+        select: {
+          images: 'images',
+        },
+        prepare(selection) {
+          const {images} = selection
+          return {
+            title: 'Image [Row]',
+            subtitle: 'number of photos:' + images.length,
+            media: images[0],
           }
         },
       },
@@ -300,7 +374,7 @@ export default {
         prepare(selection) {
           const {images} = selection
           return {
-            title: 'Image Carousel',
+            title: 'Image [Carousel]',
             subtitle: 'number of photos:' + images.length,
             media: images[0],
           }

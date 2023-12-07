@@ -55,13 +55,6 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
-      name: 'pronouns',
-      type: 'string',
-      title: 'Pronouns :P',
-      group: 'meta',
-      validation: (Rule) => Rule.required(),
-    },
-    {
       name: 'birthday',
       type: 'string',
       title: 'Birthday',

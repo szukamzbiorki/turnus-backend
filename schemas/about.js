@@ -20,6 +20,12 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'bigimgmobile',
+      type: 'image',
+      title: 'Big Image Mobile',
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: 'introduction',
       type: 'text',
       title: 'Introduction',

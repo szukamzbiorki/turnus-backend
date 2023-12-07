@@ -65,11 +65,17 @@ export default {
           name: 'image',
           type: 'image',
           description: 'horizontally long image',
+          options: {
+            hotspot: true,
+          },
         },
         {
           name: 'imagemobile',
           type: 'image',
           description: 'closer to square size',
+          options: {
+            hotspot: true,
+          },
         },
         {
           name: 'link',
@@ -113,6 +119,17 @@ export default {
         },
       ],
       group: 'banners',
+    },
+    {
+      name: 'announcements',
+      type: 'array',
+      of: [
+        {
+          name: 'a',
+          type: 'string',
+        },
+      ],
+      group: 'news',
     },
     {
       name: 'newssection',

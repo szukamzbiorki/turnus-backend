@@ -1,8 +1,7 @@
 export default {
   name: 'event',
   type: 'document',
-  title: 'EVENTS',
-  icon: null,
+  title: 'EXHIBITION',
   groups: [
     {
       name: 'meta',
@@ -17,78 +16,114 @@ export default {
       title: 'BLOCKS',
     },
   ],
-  preview: {
-    select: {
-      title: 'title',
-      date: 'date',
-      type: 'type',
-      show: 'show',
-    },
-    prepare(selection) {
-      const {title, date, bigimg, show, type} = selection
-      const datevar = new Date(date)
-      const dateoutput = datevar.getDate() + '/' + (datevar.getMonth() + 1)
-      return {
-        title: title,
-        subtitle:
-          show == true
-            ? `🟢 ${dateoutput} ${type.toUpperCase()}`
-            : `🔴 ${dateoutput} ${type.toUpperCase()}`,
-      }
-    },
-  },
+
   fields: [
     {
-      title: 'Type',
-      name: 'type',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
-      group: 'meta',
+      name: 'images',
+      title: 'Photos',
+      type: 'array',
+      of: [
+        {
+          name: 'image',
+          type: 'image',
+          options: {
+            hotspot: true,
+            metadata: ['palette'],
+          },
+          fields: [{name: 'caption', type: 'string'}],
+        },
+      ],
     },
     {
-      title: 'Show',
-      name: 'show',
-      type: 'boolean',
-      validation: (Rule) => Rule.required(),
-      group: 'meta',
-    },
-    {
-      name: 'title',
-      type: 'string',
-      title: 'Title',
-      validation: (Rule) => Rule.required(),
-      group: 'meta',
-    },
-    {
-      title: 'Godzina',
-      name: 'hour',
-      type: 'string',
-      group: 'meta',
-      validation: (Rule) => Rule.required(),
-    },
-    {
-      name: 'date',
-      type: 'date',
-      title: 'Date',
-      group: 'meta',
-    },
-    {
-      name: 'place',
-      type: 'string',
-      title: 'Place',
-      group: 'meta',
-    },
-    {
-      name: 'content',
+      name: 'text',
       type: 'text',
-      title: 'Content',
-      group: 'meta',
     },
     {
-      name: 'link',
-      type: 'url',
-      title: 'Link',
-      group: 'meta',
+      type: 'array',
+      name: 'events',
+      of: [
+        {
+          type: 'object',
+          name: 'el',
+          preview: {
+            select: {
+              title: 'title',
+              date: 'date',
+              show: 'show',
+              hour: 'hour',
+            },
+            prepare(selection) {
+              const {title, date, show, hour} = selection
+              const datevar = new Date(date)
+              const newdate = datevar.getDate() + '/' + (datevar.getMonth() + 1)
+              return {
+                title: newdate + ' ' + hour,
+                subtitle: show == true ? `🟢 ${title}` : `🔴 ${title}`,
+              }
+            },
+          },
+          fieldsets: [
+            {
+              name: 'tickets',
+              title: 'Tickets',
+              description: 'Leave empty if no tickets',
+              options: {
+                columns: 2,
+              },
+            },
+          ],
+          fields: [
+            {
+              title: 'Show',
+              name: 'show',
+              type: 'boolean',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'title',
+              type: 'string',
+              title: 'Title',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'date',
+              type: 'date',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'hour',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'desc',
+              type: 'text',
+              title: 'Short description',
+            },
+            {
+              name: 'link',
+              type: 'url',
+            },
+            {
+              name: 'place',
+              type: 'string',
+              description: 'Leave empty if no place',
+            },
+            {
+              name: 'price',
+              type: 'string',
+              title: 'Price',
+              fieldset: 'tickets',
+            },
+            {
+              name: 'ticketslink',
+              type: 'url',
+              title: 'Link',
+              fieldset: 'tickets',
+            },
+          ],
+        },
+      ],
     },
   ],
 }

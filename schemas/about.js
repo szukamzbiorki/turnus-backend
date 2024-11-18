@@ -14,16 +14,16 @@ export default {
   title: 'ABOUT',
   fields: [
     {
-      name: 'bigimg',
+      name: 'image',
       type: 'image',
-      title: 'Big Image',
-      validation: (Rule) => Rule.required(),
+      title: 'Image',
+      // validation: (Rule) => Rule.required(),
     },
     {
-      name: 'bigimgmobile',
+      name: 'imagetwo',
       type: 'image',
-      title: 'Big Image Mobile',
-      validation: (Rule) => Rule.required(),
+      title: 'Image',
+      // validation: (Rule) => Rule.required(),
     },
     {
       name: 'introduction',
@@ -38,26 +38,6 @@ export default {
       type: 'object',
       icon: StringIcon,
       fields: [
-        {
-          title: 'Font',
-          name: 'font',
-          type: 'string',
-          options: {
-            list: ['helvetica', 'times'],
-            layout: 'radio',
-          },
-          validation: (Rule) => Rule.required(),
-        },
-        {
-          title: 'Alignment',
-          name: 'align',
-          type: 'string',
-          options: {
-            list: ['left', 'middle', 'right'],
-            layout: 'radio',
-          },
-          validation: (Rule) => Rule.required(),
-        },
         {
           name: 'contentblocks',
           type: 'array',
@@ -91,105 +71,55 @@ export default {
       ],
       preview: {
         select: {
-          title: 'title',
           contentblocks: 'contentblocks',
-          font: 'font',
         },
         prepare(selection) {
-          const {title, contentblocks, font} = selection
+          const {contentblocks} = selection
           return {
             title: 'Text [Small]',
-            subtitle: font.toUpperCase() + ' ' + truncateString(contentblocks[0].content, 30),
+            subtitle: truncateString(contentblocks[0].content, 30),
             media: StringIcon,
           }
         },
       },
     },
     {
-      name: 'adres',
+      name: 'partnerstext',
       type: 'text',
-      title: 'Adres',
-      validation: (Rule) => Rule.required(),
+      title: 'Partners Text',
     },
     {
-      name: 'contactinfo',
+      name: 'partners',
       type: 'array',
-      title: 'Contact',
+      title: 'Our Partners',
       of: [
         {
-          name: 'contactentry',
           type: 'object',
-          title: 'Contact method',
-          preview: {
-            select: {
-              contactmethod: 'contactmethod',
-              contactdata: 'contactdata',
-            },
-            prepare(selection) {
-              const {contactmethod, contactdata} = selection
-              return {
-                title: contactmethod,
-                subtitle: contactdata,
-              }
-            },
-          },
           fields: [
             {
-              name: 'contactmethod',
+              name: 'name',
               type: 'string',
-              title: 'Contact Method',
             },
             {
-              name: 'contactdata',
-              type: 'string',
-              title: 'Contact Data',
-            },
-          ],
-        },
-      ],
-      validation: (Rule) => Rule.required(),
-    },
-    {
-      name: 'openalert',
-      type: 'string',
-      title: 'Alert about opening',
-    },
-    {
-      name: 'open',
-      type: 'array',
-      title: 'Opening hours',
-      of: [
-        {
-          name: 'zakres',
-          type: 'object',
-          title: 'Zakres',
-          preview: {
-            select: {
-              day: 'day',
-              time: 'time',
-            },
-            prepare(selection) {
-              const {day, time} = selection
-              return {
-                title: day,
-                subtitle: time,
-              }
-            },
-          },
-          fields: [
-            {
-              name: 'day',
-              type: 'string',
-              title: 'Day',
+              name: 'about',
+              type: 'text',
             },
             {
-              name: 'time',
-              type: 'string',
-              title: 'Time',
+              name: 'url',
+              type: 'url',
+            },
+            {
+              name: 'image',
+              type: 'image',
+              options: {
+                hotspot: true,
+                metadata: ['palette'],
+              },
             },
           ],
         },
       ],
     },
+    {type: 'text', name: 'names', title: 'Imiona kolaboratorów'},
   ],
 }

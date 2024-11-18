@@ -81,6 +81,13 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'desc',
+      type: 'text',
+      title: 'Short description',
+      description: 'Max. 4 zdania!!!',
+      group: 'meta',
+    },
+    {
       name: 'bigimage',
       type: 'image',
       title: 'Big Image',
@@ -118,7 +125,6 @@ export default {
         {
           name: 'section',
           type: 'object',
-          title: 'Artists',
           fields: [
             {
               name: 'sectionname',

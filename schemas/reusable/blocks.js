@@ -38,16 +38,6 @@ export default {
           type: 'text',
           title: 'Content',
         },
-        {
-          name: 'space',
-          type: 'string',
-          title: 'Space Below',
-          options: {
-            list: ['0', 'S', 'M', 'L', 'XL'],
-            layout: 'radio',
-          },
-          validation: (Rule) => Rule.required(),
-        },
       ],
       preview: {
         select: {
@@ -82,16 +72,6 @@ export default {
           validation: (Rule) => Rule.required(),
         },
         {
-          title: 'Alignment',
-          name: 'align',
-          type: 'string',
-          options: {
-            list: ['left', 'middle', 'right'],
-            layout: 'radio',
-          },
-          validation: (Rule) => Rule.required(),
-        },
-        {
           name: 'contentblocks',
           type: 'array',
           of: [
@@ -121,16 +101,6 @@ export default {
             },
           ],
         },
-        {
-          name: 'space',
-          type: 'string',
-          title: 'Space Below',
-          options: {
-            list: ['0', 'S', 'M', 'L', 'XL'],
-            layout: 'radio',
-          },
-          validation: (Rule) => Rule.required(),
-        },
       ],
       preview: {
         select: {
@@ -144,6 +114,51 @@ export default {
             title: 'Text [Small]',
             subtitle: font.toUpperCase() + ' ' + truncateString(contentblocks[0].content, 30),
             media: StringIcon,
+          }
+        },
+      },
+    },
+    {
+      name: 'quote',
+      title: 'Text [Quote]',
+      type: 'object',
+      icon: StringIcon,
+      fields: [
+        {
+          title: 'Font',
+          name: 'font',
+          type: 'string',
+          options: {
+            list: ['helvetica', 'times'],
+            layout: 'radio',
+          },
+          validation: (Rule) => Rule.required(),
+        },
+        {
+          name: 'content',
+          type: 'text',
+          title: 'Content',
+        },
+        {
+          name: 'color',
+          type: 'color',
+          options: {
+            disableAlpha: true,
+          },
+        },
+      ],
+      preview: {
+        select: {
+          title: 'title',
+          content: 'content',
+          font: 'font',
+        },
+        prepare(selection) {
+          const {title, content, font} = selection
+          return {
+            title: 'Text [Quote]',
+            subtitle: font.toUpperCase() + ' ' + truncateString(content, 50),
+            media: TextIcon,
           }
         },
       },
@@ -163,6 +178,10 @@ export default {
               name: 'image',
               type: 'image',
               title: 'Image',
+              options: {
+                hotspot: true,
+                metadata: ['palette'],
+              },
             },
           ],
         },
@@ -178,18 +197,34 @@ export default {
         {
           name: 'credit',
           type: 'string',
-          title: 'Credit',
+          title: 'Credit/Author',
           description: 'Na przyklad: "Fotografia by: teniten"',
         },
         {
-          name: 'space',
+          name: 'title',
           type: 'string',
-          title: 'Space Below',
-          options: {
-            list: ['0', 'S', 'M', 'L', 'XL'],
-            layout: 'radio',
-          },
-          validation: (Rule) => Rule.required(),
+          title: 'Title',
+        },
+        {
+          name: 'year',
+          type: 'string',
+          title: 'Year',
+        },
+        {
+          name: 'worksize',
+          type: 'string',
+          title: 'Size',
+          description: 'stąd kopiujcie prawidlowy znak ×, i piszcie np. 50×60cm',
+        },
+        {
+          name: 'medium',
+          type: 'string',
+          title: 'Medium',
+        },
+        {
+          name: 'price',
+          type: 'string',
+          title: 'Price',
         },
       ],
       preview: {
@@ -216,6 +251,10 @@ export default {
           name: 'image',
           type: 'image',
           title: 'Image',
+          options: {
+            hotspot: true,
+            metadata: ['palette'],
+          },
         },
         {
           name: 'author',
@@ -228,9 +267,25 @@ export default {
           title: 'Title',
         },
         {
+          name: 'year',
+          type: 'string',
+          title: 'Year',
+        },
+        {
           name: 'medium',
           type: 'string',
           title: 'Medium',
+        },
+        {
+          name: 'size',
+          type: 'string',
+          title: 'Size',
+          description: 'stąd kopiujcie prawidlowy znak ×, i piszcie np. 50×60cm',
+        },
+        {
+          name: 'price',
+          type: 'string',
+          title: 'Price',
         },
         {
           name: 'sentence',
@@ -243,16 +298,6 @@ export default {
           type: 'string',
           options: {
             list: ['left', 'right'],
-            layout: 'radio',
-          },
-          validation: (Rule) => Rule.required(),
-        },
-        {
-          name: 'space',
-          type: 'string',
-          title: 'Space Below',
-          options: {
-            list: ['0', 'S', 'M', 'L', 'XL'],
             layout: 'radio',
           },
           validation: (Rule) => Rule.required(),
@@ -288,6 +333,10 @@ export default {
               name: 'image',
               type: 'image',
               title: 'Image',
+              options: {
+                hotspot: true,
+                metadata: ['palette'],
+              },
               fields: [
                 {
                   name: 'author',
@@ -298,6 +347,17 @@ export default {
                   name: 'title',
                   type: 'string',
                   title: 'Title',
+                },
+                {
+                  name: 'year',
+                  type: 'string',
+                  title: 'Year',
+                },
+                {
+                  name: 'size',
+                  type: 'string',
+                  title: 'Size',
+                  description: 'stąd kopiujcie prawidlowy znak ×, i piszcie np. 50×60cm',
                 },
                 {
                   name: 'medium',
@@ -312,16 +372,6 @@ export default {
               ],
             },
           ],
-        },
-        {
-          name: 'space',
-          type: 'string',
-          title: 'Space Below',
-          options: {
-            list: ['0', 'S', 'M', 'L', 'XL'],
-            layout: 'radio',
-          },
-          validation: (Rule) => Rule.required(),
         },
       ],
       preview: {
@@ -353,18 +403,12 @@ export default {
               name: 'image',
               type: 'image',
               title: 'Image',
+              options: {
+                hotspot: true,
+                metadata: ['palette'],
+              },
             },
           ],
-        },
-        {
-          name: 'space',
-          type: 'string',
-          title: 'Space Below',
-          options: {
-            list: ['0', 'S', 'M', 'L', 'XL'],
-            layout: 'radio',
-          },
-          validation: (Rule) => Rule.required(),
         },
       ],
       preview: {

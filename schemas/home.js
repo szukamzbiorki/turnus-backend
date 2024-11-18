@@ -26,35 +26,37 @@ export default {
       group: 'style',
     },
     {
-      title: 'Background Color',
-      name: 'bgcol',
-      type: 'color',
-      options: {
-        disableAlpha: true,
-      },
-      group: 'style',
+      name: 'headers',
+      type: 'object',
+      title: 'Headers',
+      fields: [
+        {
+          name: 'show',
+          type: 'boolean',
+        },
+        {
+          name: 'announcements',
+          type: 'array',
+          description:
+            ' | <- ten znak działa jako enter. Żeby lepiej stylizować ten element, bo czasem są problemy z tym jak to wygląda',
+          of: [
+            {
+              name: 'a',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+      group: 'news',
     },
     {
-      title: 'Type Color',
-      name: 'typecol',
-      type: 'color',
-      options: {
-        disableAlpha: true,
-      },
-      group: 'style',
+      name: 'featured',
+      type: 'reference',
+      to: [{type: 'exhibition'}],
     },
     {
-      title: 'Secondary Type Color',
-      name: 'sectypecol',
-      type: 'color',
-      options: {
-        disableAlpha: true,
-      },
-      group: 'style',
-    },
-    {
-      name: 'bannertop',
-      title: 'Banner Top',
+      name: 'featuredimages',
+      title: 'Featured Images',
       type: 'object',
       fields: [
         {
@@ -62,82 +64,89 @@ export default {
           type: 'boolean',
         },
         {
-          name: 'image',
-          type: 'image',
-          description: 'horizontally long image',
-          options: {
-            hotspot: true,
-          },
-        },
-        {
-          name: 'imagemobile',
-          type: 'image',
-          description: 'closer to square size',
-          options: {
-            hotspot: true,
-          },
-        },
-        {
-          name: 'link',
-          type: 'url',
-        },
-        {
-          name: 'text',
-          description: 'alt text',
-          type: 'string',
+          name: 'images',
+          type: 'array',
+          of: [
+            {
+              name: 'newsimage',
+              type: 'image',
+            },
+          ],
         },
       ],
-      group: 'banners',
+      group: 'news',
     },
+
     {
-      name: 'bannerbot',
-      title: 'Banner Bottom',
+      name: 'sentence',
+      title: 'Featured Sentence',
       type: 'object',
       fields: [
         {
-          name: 'show',
-          type: 'boolean',
-        },
-        {
-          name: 'image',
-          type: 'image',
-          description: 'horizontally long image',
-        },
-        {
-          name: 'imagemobile',
-          type: 'image',
-          description: 'closer to square size',
-        },
-        {
-          name: 'link',
-          type: 'url',
-        },
-        {
-          name: 'text',
-          description: 'alt text',
+          name: 'sentence',
           type: 'string',
         },
+        {
+          name: 'color',
+          type: 'color',
+          options: {
+            disableAlpha: true,
+          },
+        },
       ],
-      group: 'banners',
+      group: 'news',
     },
     {
-      name: 'announcements',
+      name: 'weeks',
+      title: 'Weekly Images',
       type: 'array',
       of: [
         {
-          name: 'a',
-          type: 'string',
+          name: 'week',
+          type: 'object',
+          fields: [
+            {
+              name: 'range',
+              title: 'Week range',
+              description: 'np. 9.01-16.01',
+              type: 'string',
+            },
+            {
+              name: 'description',
+              type: 'text',
+            },
+            {
+              type: 'array',
+              name: 'images',
+              of: [
+                {
+                  type: 'image',
+                  name: 'image',
+                },
+              ],
+            },
+          ],
         },
       ],
       group: 'news',
     },
     {
       name: 'newssection',
-      type: 'array',
-      of: [
+      type: 'object',
+      fields: [
         {
-          name: 'newsimage',
-          type: 'image',
+          name: 'show',
+          type: 'boolean',
+        },
+        {
+          name: 'news',
+          type: 'array',
+          of: [
+            {
+              name: 'newsimage',
+              type: 'image',
+            },
+          ],
         },
       ],
       group: 'news',

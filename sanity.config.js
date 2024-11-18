@@ -15,7 +15,7 @@ import {
 } from '@sanity/icons'
 
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
-const singletonTypes = new Set(['home', 'about', 'cafe'])
+const singletonTypes = new Set(['home', 'about', 'cafe', 'event'])
 
 export default defineConfig({
   name: 'default',
@@ -42,14 +42,9 @@ export default defineConfig({
               ),
             S.listItem()
               .title('EVENTS')
-              .schemaType('event')
+              .id('event')
               .icon(CalendarIcon)
-              .child(
-                S.documentList()
-                  .title('EVENTS')
-                  .filter('_type == "event"')
-                  .defaultOrdering([{field: 'year', direction: 'desc'}]),
-              ),
+              .child(S.document().title('EVENTY').schemaType('event').documentId('event')),
             S.listItem()
               .title('ARTISTS')
               .schemaType('artist')
@@ -62,6 +57,11 @@ export default defineConfig({
               ),
             S.divider(),
             S.listItem()
+              .title('HOME')
+              .id('home')
+              .icon(HomeIcon)
+              .child(S.document().title('HOME').schemaType('home').documentId('home')),
+            S.listItem()
               .title('CAFE')
               .id('cafe')
               .icon(CgCoffee)
@@ -71,11 +71,6 @@ export default defineConfig({
               .id('about')
               .icon(StarIcon)
               .child(S.document().title('ABOUT').schemaType('about').documentId('about')),
-            S.listItem()
-              .title('HOME')
-              .id('home')
-              .icon(HomeIcon)
-              .child(S.document().title('HOME').schemaType('home').documentId('home')),
           ]),
     }),
     visionTool(),

@@ -14,9 +14,30 @@ export default {
   ],
   fields: [
     {
-      title: 'Title',
-      name: 'title',
-      type: 'string',
+      name: 'images',
+      title: 'Photos',
+      type: 'array',
+      of: [
+        {
+          name: 'image',
+          type: 'image',
+          options: {
+            hotspot: true,
+            metadata: ['palette'],
+          },
+          fields: [{name: 'caption', type: 'string'}],
+        },
+      ],
+    },
+    {
+      title: 'About',
+      name: 'about',
+      type: 'text',
+    },
+    {
+      title: 'Opening Hours',
+      name: 'hours',
+      type: 'text',
     },
     {
       title: 'Menu',
@@ -77,33 +98,6 @@ export default {
       name: 'currency',
       type: 'string',
       group: 'menu',
-    },
-    {
-      title: 'Sticker',
-      name: 'sticker',
-      type: 'object',
-      group: 'sticker',
-      fields: [
-        {
-          type: 'boolean',
-          name: 'display',
-        },
-        {
-          type: 'string',
-          name: 'title',
-        },
-        {
-          type: 'image',
-          name: 'image',
-        },
-        {
-          type: 'color',
-          name: 'color',
-          options: {
-            disableAlpha: true,
-          },
-        },
-      ],
     },
   ],
 }
